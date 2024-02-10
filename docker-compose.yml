@@ -1,0 +1,34 @@
+version: "3.5"
+
+services:
+    quiz-nginx:
+        container_name: quiz-nginx
+        build:
+            context: .
+            dockerfile: docker/nginx.dockerfile
+        image: nginx
+        ports:
+            - "8080:80"
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        links:
+            - quiz-fpm
+    quiz-fpm:
+        container_name: quiz-fpm
+        build:
+            dockerfile: docker/fpm.dockerfile
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+    quiz-pgsql:
+        container_name: quiz-pgsql
+        image: postgres:16.1
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - POSTGRES_DB=postgres
+        ports:
+            - "5438:5432"
+        volumes:
+            - ./docker_var/pgdata:/var/lib/postgresql/data:rw

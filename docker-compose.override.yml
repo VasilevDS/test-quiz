@@ -1,0 +1,4 @@
+services:
+  quiz-fpm:
+    # for running on MacBooks with arm processors (M1/M2/M3)
+    platform: linux/arm64/v8
