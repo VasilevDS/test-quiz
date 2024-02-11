@@ -11,7 +11,7 @@ final class AnswerDtoFactory
 {
     public function fromAnswer(Answer $answer): AnswerDto
     {
-        return new AnswerDto($answer->getText(), $answer->isCorrect());
+        return new AnswerDto($answer->getId(), $answer->getText(), $answer->isCorrect());
     }
 
     /**

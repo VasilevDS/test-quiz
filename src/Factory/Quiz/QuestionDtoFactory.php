@@ -20,7 +20,7 @@ final readonly class QuestionDtoFactory
 
         $answerDtoList = $this->answerDtoFactory->fromCollectionAnswer($answers->toArray());
 
-        return new QuestionDto($question->getText(), $answerDtoList);
+        return new QuestionDto($question->getId(), $question->getText(), $answerDtoList);
     }
 
     /**
