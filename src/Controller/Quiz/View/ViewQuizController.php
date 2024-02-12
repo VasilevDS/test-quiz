@@ -20,6 +20,6 @@ final class ViewQuizController extends ApiController
     {
         $quizDto = $handler->handle($quizId);
 
-        return $this->json($quizDto, context: ['groups' => 'view']);
+        return $this->json($quizDto);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory\Quiz;
 
-use App\DTO\Quiz\QuestionDto;
+use App\DTO\Quiz\Response\QuestionDto;
 use App\Entity\Quiz\Question;
 
 final readonly class QuestionDtoFactory

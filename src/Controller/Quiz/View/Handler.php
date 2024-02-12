@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Quiz\View;
 
-use App\Factory\Quiz\QuizDtoFactory;
-use App\DTO\Quiz\QuizDto;
+use App\DTO\Quiz\Response\ViewQuizResponse;
+use App\Factory\Quiz\ViewQuizResponseFactory;
 use App\Repository\Quiz\QuizRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -13,11 +13,11 @@ final readonly class Handler
 {
     public function __construct(
         private QuizRepository $quizRepository,
-        private QuizDtoFactory $quizDtoFactory,
+        private ViewQuizResponseFactory $quizDtoFactory,
     ) {
     }
 
-    public function handle(int $quizId): QuizDto
+    public function handle(int $quizId): ViewQuizResponse
     {
         $quiz = $this->quizRepository->findByIdWithQuestionsAndAnswer($quizId);
 
