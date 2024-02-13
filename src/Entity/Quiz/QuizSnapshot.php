@@ -3,7 +3,7 @@
 namespace App\Entity\Quiz;
 
 use App\Repository\Quiz\QuizSnapshotRepository;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuizSnapshotRepository::class)]
@@ -18,11 +18,16 @@ class QuizSnapshot
     #[ORM\JoinColumn(nullable: false)]
     private ?Quiz $quiz = null;
 
-    #[ORM\Column(type: 'datetime')]
-    private ?DateTime $createdAt = null;
+    #[ORM\Column]
+    private DateTimeImmutable $createdAt;
 
     #[ORM\Column(type: 'json', options: ['jsonb' => true])]
     private ?array $data = [];
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -41,12 +46,12 @@ class QuizSnapshot
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTime
+    public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTime $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
