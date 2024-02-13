@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Quiz\View;
 
 use App\DTO\Quiz\Response\ViewQuizResponse;
-use App\Factory\Quiz\ViewQuizResponseFactory;
+use App\Factory\Quiz\View\ViewQuizResponseFactory;
 use App\Repository\Quiz\QuizRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Factory\Quiz;
+namespace App\Factory\Quiz\View;
 
 use App\DTO\Quiz\Response\AnswerDto;
 use App\Entity\Quiz\Answer;
