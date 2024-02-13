@@ -19,7 +19,10 @@ class Question
     #[ORM\JoinColumn(nullable: false)]
     private Quiz $quiz;
 
-    #[ORM\OneToMany(targetEntity: Answer::class, mappedBy: 'question', orphanRemoval: true)]
+    /**
+     * @var Collection<int, Answer>
+     */
+    #[ORM\OneToMany(targetEntity: Answer::class, mappedBy: 'question', indexBy: 'id')]
     private Collection $answers;
 
     #[ORM\Column(type: 'text')]
@@ -47,6 +50,9 @@ class Question
         return $this;
     }
 
+    /**
+     * @return Collection<int, Answer>
+     */
     public function getAnswers(): Collection
     {
         return $this->answers;

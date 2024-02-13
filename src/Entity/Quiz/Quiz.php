@@ -18,7 +18,8 @@ class Quiz
     #[ORM\Column(type: 'text')]
     private ?string $name = null;
 
-    #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'quiz', orphanRemoval: true)]
+    /** @var Collection<int, Question> $questions */
+    #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'quiz', indexBy: 'id')]
     private Collection $questions;
 
     #[ORM\OneToMany(targetEntity: QuizSnapshot::class, mappedBy: 'quiz', cascade: ['remove'])]
@@ -47,6 +48,9 @@ class Quiz
         return $this;
     }
 
+    /**
+     * @return Collection<int, Question>
+     */
     public function getQuestions(): Collection
     {
         return $this->questions;
