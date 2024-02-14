@@ -58,6 +58,16 @@ class Question
         return $this->answers;
     }
 
+    /**
+     * @param Collection<int, Answer> $answers
+     */
+    public function setAnswers(Collection $answers): self
+    {
+        $this->answers = $answers;
+
+        return $this;
+    }
+
     public function addAnswer(Answer $answer): self
     {
         if (!$this->answers->contains($answer)) {
