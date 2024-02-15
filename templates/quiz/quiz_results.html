@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+    <style>
+        .row {
+            display: flex;
+        }
+
+        .column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .question {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Style for the button */
+        button {
+            font-size: 18px;
+            padding: 12px 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Quiz Results</h1>
+<button onclick="startTestAgain()">Start Test Again</button>
+<button onclick="openListTests()">Open page with tests</button>
+<div class="row">
+    <div class="column" id="correctResults">
+        <h2>Correct Answers</h2>
+    </div>
+    <div class="column" id="incorrectResults">
+        <h2>Incorrect Answers</h2>
+    </div>
+</div>
+
+<script>
+    // Function to parse URL parameters
+    function getUrlParameter(name) {
+        name = name.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+        const results = regex.exec(window.location.href);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+    let quizId;
+    // Retrieve the encoded data from the URL parameter
+    const encodedData = getUrlParameter('data');
+    if (encodedData) {
+        // Decode and parse the JSON data
+        const jsonData = JSON.parse(decodeURIComponent(encodedData));
+
+        quizId = jsonData.id;
+        const correctResultsContainer = document.getElementById('correctResults');
+        const incorrectResultsContainer = document.getElementById('incorrectResults');
+        const questions = jsonData.questions;
+
+        // Iterate over questions and display results in respective columns
+        questions.forEach(question => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+
+            const questionText = document.createElement('h3');
+            questionText.textContent = question.text;
+            questionDiv.appendChild(questionText);
+
+            if (question.isRight) {
+                correctResultsContainer.appendChild(questionDiv);
+            } else {
+                incorrectResultsContainer.appendChild(questionDiv);
+            }
+        });
+    } else {
+        // Display an error message if no data is found in the URL parameter
+        const errorMessage = document.createElement('p');
+        errorMessage.textContent = 'No quiz data found.';
+        document.body.appendChild(errorMessage);
+    }
+
+    // Function to start the test again
+    function startTestAgain() {
+        window.location.href = 'http://localhost:8080/quiz/view/' + quizId;
+    }
+
+    // Function to start the test again
+    function openListTests() {
+        window.location.href = 'http://localhost:8080/quiz/list';
+    }
+</script>
+</body>
+</html>
