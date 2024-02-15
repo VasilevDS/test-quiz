@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Validator\Quiz\Vote;
 
+use App\DTO\Quiz\Request\VoteAnswer;
 use App\DTO\Quiz\Request\VoteQuizRequest;
+use App\Entity\Quiz\Question;
 use App\Repository\Quiz\QuizRepository;
 use Override;
 use Symfony\Component\Validator\Constraint;
@@ -63,16 +65,36 @@ final class VoteQuizConstraintValidator extends ConstraintValidator
                 continue;
             }
 
-            foreach ($requestQuestion->answers as $answerPosition => $requestAnswer) {
-                $answer = $question->getAnswers()->get($requestAnswer->id);
+            $this->validateAnswers($requestQuestion->answers, $question, $questionPosition);
+        }
+    }
 
-                if (null === $answer) {
-                    $this->context
-                        ->buildViolation('Invalid answer ID passed')
-                        ->atPath(sprintf('questions[%d].answers[%d].id', $questionPosition, $answerPosition))
-                        ->addViolation();
-                }
+    /**
+     * @param VoteAnswer[] $requestAnswers
+     */
+    private function validateAnswers(array $requestAnswers, Question $question, int $questionPosition): void
+    {
+        $selectedAnswer = false;
+        foreach ($requestAnswers as $answerPosition => $requestAnswer) {
+            $answer = $question->getAnswers()->get($requestAnswer->id);
+
+            if (null === $answer) {
+                $this->context
+                    ->buildViolation('Invalid answer ID passed')
+                    ->atPath(sprintf('questions[%d].answers[%d].id', $questionPosition, $answerPosition))
+                    ->addViolation();
             }
+
+            if ($requestAnswer->selected) {
+                $selectedAnswer = true;
+            }
+        }
+
+        if (!$selectedAnswer) {
+            $this->context
+                ->buildViolation('No answer selected')
+                ->atPath(sprintf('questions[%d]', $questionPosition))
+                ->addViolation();
         }
     }
 }
