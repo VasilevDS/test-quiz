@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Quiz\Vote;
+namespace App\Controller\Api\Quiz\Vote;
 
-use App\Controller\ApiController;
+use App\Controller\Api\ApiController;
 use App\DTO\Quiz\Request\VoteQuizRequest;
 use App\Infrastructure\RequestMapper\MapRequestPayloadValueResolver;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Quiz\View;
+namespace App\Controller\Api\Quiz\View;
 
-use App\Controller\ApiController;
+use App\Controller\Api\ApiController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Quiz\View;
+namespace App\Controller\Api\Quiz\View;
 
 use App\DTO\Quiz\Response\ViewQuizResponse;
 use App\Factory\Quiz\View\ViewQuizResponseFactory;

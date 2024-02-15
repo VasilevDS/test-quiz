@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Quiz\Vote;
+namespace App\Controller\Api\Quiz\Vote;
 
 use App\DTO\Quiz\Request\VoteQuizRequest;
 use App\DTO\Quiz\Snapshot\QuizSnapshotData;
