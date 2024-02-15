@@ -29,7 +29,7 @@ final class FillQuizCommand extends Command
             '1 + 5' => true,
             '1' => false,
             '6' => true,
-            '2 + 4' => false,
+            '2 + 4' => true,
         ],
         '4 + 4 =' => [
             '8' => true,
