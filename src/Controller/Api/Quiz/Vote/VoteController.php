@@ -21,6 +21,6 @@ final class VoteController extends ApiController
     ): JsonResponse {
         $quizSnapshotData = $handler->handle($passQuizRequest);
 
-        return $this->json($quizSnapshotData);
+        return $this->json($quizSnapshotData, context: ['groups' => 'result']);
     }
 }
