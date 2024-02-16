@@ -58,7 +58,7 @@ final class VoteQuizConstraintValidator extends ConstraintValidator
 
             if (null === $question) {
                 $this->context
-                    ->buildViolation('Invalid question ID passed'.' '.$requestQuestion->id)
+                    ->buildViolation('Invalid question ID passed')
                     ->atPath(sprintf('questions[%d].id', $questionPosition))
                     ->addViolation();
 

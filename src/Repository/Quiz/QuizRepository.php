@@ -8,7 +8,7 @@ use App\Entity\Quiz\Quiz;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-final class QuizRepository extends ServiceEntityRepository
+class QuizRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

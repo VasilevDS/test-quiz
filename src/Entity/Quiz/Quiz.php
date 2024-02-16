@@ -66,6 +66,16 @@ class Quiz
         return $this;
     }
 
+    /**
+     * @param Collection<int, Question> $answers
+     */
+    public function setAnswers(Collection $answers): self
+    {
+        $this->questions = $answers;
+
+        return $this;
+    }
+
     public function getSnapshots(): Collection
     {
         return $this->snapshots;
